@@ -3,18 +3,18 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
-import '../../../model/songs/song.dart';
-import '../../dtos/song_dto.dart';
-import 'song_repository.dart';
+import '../../../model/artists/artist.dart';
+import '../../dtos/artist_dto.dart';
+import 'artist_repository.dart';
 
-class SongRepositoryFirebase extends SongRepository {
+class ArtistRepositoryFirebase extends ArtistRepository {
   static const String _primaryHost =
       'flutter-project-test-lk-hour-default-rtdb.asia-southeast1.firebasedatabase.app';
   static const String _fallbackHost =
       'flutter-project-test-lk-hour-default-rtdb.firebaseio.com';
 
-  final Uri songsUri = Uri.https(_primaryHost, '/songs.json');
-  final Uri songsFallbackUri = Uri.https(_fallbackHost, '/songs.json');
+  final Uri artistsUri = Uri.https(_primaryHost, '/artists.json');
+  final Uri artistsFallbackUri = Uri.https(_fallbackHost, '/artists.json');
 
   Future<http.Response> _getWithFallback(Uri primary, Uri fallback) async {
     try {
@@ -25,29 +25,30 @@ class SongRepositoryFirebase extends SongRepository {
   }
 
   @override
-  Future<List<Song>> fetchSongs() async {
-    final http.Response response = await _getWithFallback(songsUri, songsFallbackUri);
+  Future<List<Artist>> fetchArtists() async {
+    final http.Response response =
+        await _getWithFallback(artistsUri, artistsFallbackUri);
 
     if (response.statusCode == 200) {
       final dynamic decoded = json.decode(response.body);
       if (decoded == null) return [];
       if (decoded is! Map<String, dynamic>) {
-        throw Exception('Unexpected songs payload format');
+        throw Exception('Unexpected artists payload format');
       }
 
-      final List<Song> result = [];
+      final List<Artist> result = [];
       for (final entry in decoded.entries) {
-        result.add(SongDto.fromJson(entry.key, entry.value as Map<String, dynamic>));
+        result.add(ArtistDto.fromJson(entry.key, entry.value as Map<String, dynamic>));
       }
 
       return result;
     }
 
-    throw Exception('Failed to load songs (status ${response.statusCode})');
+    throw Exception('Failed to load artists (status ${response.statusCode})');
   }
 
   @override
-  Future<Song?> fetchSongById(String id) async {
+  Future<Artist?> fetchArtistById(String id) async {
     throw UnimplementedError();
   }
 }
