@@ -22,4 +22,17 @@ class SongRepositoryMock implements SongRepository {
       );
     });
   }
+
+  @override
+  Future<Song> likeSong(Song song) async {
+    return Future.delayed(Duration(seconds: 1), () {
+      final index = _songs.indexWhere((s) => s.id == song.id);
+      if (index != -1) {
+        final updatedSong = song.copyWith(likes: song.likes + 1);
+        _songs[index] = updatedSong;
+        return updatedSong;
+      }
+      throw Exception("Song not found");
+    });
+  }
 }
