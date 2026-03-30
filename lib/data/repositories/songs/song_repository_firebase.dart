@@ -32,7 +32,9 @@ class SongRepositoryFirebase extends SongRepository {
 
       List<Song> result = [];
       for (final entry in songJson.entries) {
-        result.add(SongDto.fromJson(entry.key, entry.value));
+        if (entry.value != null) {
+          result.add(SongDto.fromJson(entry.key, entry.value));
+        }
       }
 
       // 3- Store in memory cache
@@ -59,8 +61,12 @@ class SongRepositoryFirebase extends SongRepository {
 
   @override
   Future<Song> likeSong(Song song) async {
-    // 1- Create the updated song with incremented likes
-    final updatedSong = song.copyWith(likes: song.likes + 1);
+    // 1- Toggle the like status: if already liked, unlike it; otherwise, like it
+    final newLikesCount = song.isLiked ? song.likes - 1 : song.likes + 1;
+    final updatedSong = song.copyWith(
+      likes: newLikesCount,
+      isLiked: !song.isLiked,
+    );
 
     // 2- Send PUT request to update the song in Firebase
     final http.Response response = await http.put(

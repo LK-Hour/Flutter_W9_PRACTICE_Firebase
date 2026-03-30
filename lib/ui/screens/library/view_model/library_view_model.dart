@@ -55,6 +55,7 @@ class LibraryViewModel extends ChangeNotifier {
       }
 
       List<LibraryItemData> data = songs
+          .where((song) => mapArtist.containsKey(song.artistId))
           .map(
             (song) =>
                 LibraryItemData(song: song, artist: mapArtist[song.artistId]!),

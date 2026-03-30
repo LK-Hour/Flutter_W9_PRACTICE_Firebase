@@ -28,7 +28,11 @@ class SongRepositoryMock implements SongRepository {
     return Future.delayed(Duration(seconds: 1), () {
       final index = _songs.indexWhere((s) => s.id == song.id);
       if (index != -1) {
-        final updatedSong = song.copyWith(likes: song.likes + 1);
+        final newLikesCount = song.isLiked ? song.likes - 1 : song.likes + 1;
+        final updatedSong = song.copyWith(
+          likes: newLikesCount,
+          isLiked: !song.isLiked,
+        );
         _songs[index] = updatedSong;
         return updatedSong;
       }

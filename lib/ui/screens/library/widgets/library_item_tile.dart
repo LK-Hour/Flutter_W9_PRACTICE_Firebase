@@ -49,7 +49,10 @@ class LibraryItemTile extends StatelessWidget {
                 ),
               SizedBox(width: 8),
               IconButton(
-                icon: Icon(Icons.favorite, color: Colors.red),
+                icon: Icon(
+                  data.song.isLiked ? Icons.favorite : Icons.favorite_border,
+                  color: data.song.isLiked ? Colors.red : Colors.grey,
+                ),
                 onPressed: onLike,
               ),
               Text('${data.song.likes}'),
