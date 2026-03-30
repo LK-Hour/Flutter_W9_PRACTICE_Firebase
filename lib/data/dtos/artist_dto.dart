@@ -3,7 +3,7 @@ import '../../domain/model/artist/artist.dart';
 class ArtistDto {
   static const String nameKey = 'name';
   static const String genreKey = 'genre';
-  static const String imageUrlKey = 'imageUrl';
+static const String imageUrlKey = 'imageUrl';
 
   static Artist fromJson(String id, Map<String, dynamic> json) {
     assert(json[nameKey] is String);

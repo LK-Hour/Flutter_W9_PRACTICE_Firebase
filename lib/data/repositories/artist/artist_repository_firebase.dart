@@ -12,22 +12,33 @@ class ArtistRepositoryFirebase implements ArtistRepository {
     '/artists.json',
   );
 
+  // In-memory cache for artists
+  List<Artist>? _cachedArtists;
+
   @override
-  Future<List<Artist>> fetchArtists() async {
+  Future<List<Artist>> fetchArtists({bool forceFetch = false}) async {
+    // 1- Return cache if available and not forcing fetch
+    if (_cachedArtists != null && !forceFetch) {
+      return _cachedArtists!;
+    }
+
+    // 2- Fetch from API
     final http.Response response = await http.get(artistsUri);
 
     if (response.statusCode == 200) {
-      // 1 - Send the retrieved list of songs
-      Map<String, dynamic> songJson = json.decode(response.body);
+      Map<String, dynamic> artistJson = json.decode(response.body);
 
       List<Artist> result = [];
-      for (final entry in songJson.entries) {
+      for (final entry in artistJson.entries) {
         result.add(ArtistDto.fromJson(entry.key, entry.value));
       }
+
+      // 3- Store in memory cache
+      _cachedArtists = result;
+
       return result;
     } else {
-      // 2- Throw expcetion if any issue
-      throw Exception('Failed to load posts');
+      throw Exception('Failed to load artists');
     }
   }
 
