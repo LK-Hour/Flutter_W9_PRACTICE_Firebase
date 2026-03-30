@@ -1,6 +1,6 @@
 import '../data/repositories/songs/song_repository.dart';
 import '../data/repositories/songs/song_repository_firebase.dart';
-import '../model/songs/song.dart';
+import '../domain/model/songs/song.dart';
 
 void main() async {
   //   Instantiate the  song_repository_mock

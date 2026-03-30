@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../model/artists/artist.dart';
+import '../../../domain/model/artist/artist.dart';
 
 class ArtistTile extends StatelessWidget {
-  const ArtistTile({
-    super.key,
-    required this.artist,
-    this.onTap,
-  });
+  const ArtistTile({super.key, required this.artist, this.onTap});
 
   final Artist artist;
   final VoidCallback? onTap;
@@ -34,7 +30,7 @@ class ArtistTile extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
         ),
-      ),
+      )
     );
   }
 }

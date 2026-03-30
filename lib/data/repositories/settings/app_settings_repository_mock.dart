@@ -1,4 +1,4 @@
-import '../../../model/settings/app_settings.dart';
+import '../../../domain/model/settings/app_settings.dart';
 import 'app_settings_repository.dart';
 
 class AppSettingsRepositoryMock extends AppSettingsRepository {

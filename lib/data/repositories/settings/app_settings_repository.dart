@@ -1,4 +1,4 @@
-import '../../../model/settings/app_settings.dart';
+import '../../../domain/model/settings/app_settings.dart';
 
 abstract class AppSettingsRepository {
  

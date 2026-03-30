@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import '../../data/repositories/settings/app_settings_repository.dart';
-import '../../model/settings/app_settings.dart';
+import '../../domain/model/settings/app_settings.dart';
 
 class AppSettingsState extends ChangeNotifier {
   final AppSettingsRepository repository;

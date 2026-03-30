@@ -1,28 +1,29 @@
-import '../../model/artists/artist.dart';
+import '../../domain/model/artist/artist.dart';
 
 class ArtistDto {
   static const String nameKey = 'name';
-  static const String descriptionKey = 'description';
+  static const String genreKey = 'genre';
   static const String imageUrlKey = 'imageUrl';
 
   static Artist fromJson(String id, Map<String, dynamic> json) {
-    // Basic validation
-    // assert(json[nameKey] is String); // Might crash if missing, better to handle gracefully?
-    // Following SongDTO pattern:
-    
+    assert(json[nameKey] is String);
+    assert(json[genreKey] is String);
+    assert(json[imageUrlKey] is String);
+
     return Artist(
       id: id,
-      name: json[nameKey] ?? 'Unknown Artist',
-      description: json[descriptionKey] ?? '',
-      imageUrl: json[imageUrlKey] != null ? Uri.parse(json[imageUrlKey]) : null,
+      name: json[nameKey],
+      genre: json[genreKey],
+      imageUrl: Uri.parse(json[imageUrlKey]),
     );
   }
 
-  static Map<String, dynamic> toJson(Artist artist) {
+  /// Convert Artist to JSON
+  Map<String, dynamic> toJson(Artist artist) {
     return {
       nameKey: artist.name,
-      descriptionKey: artist.description,
-      imageUrlKey: artist.imageUrl?.toString(),
+      genreKey: artist.genre,
+      imageUrlKey: artist.imageUrl.toString(),
     };
   }
 }

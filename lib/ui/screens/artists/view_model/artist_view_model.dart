@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../data/repositories/artists/artist_repository.dart';
-import '../../../../model/artists/artist.dart';
+import '../../../../domain/model/artist/artist.dart';
 import '../../../utils/async_value.dart';
 
 class ArtistViewModel extends ChangeNotifier {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../model/artists/artist.dart';
+import '../../../../domain/model/artist/artist.dart';
 import '../../../utils/async_value.dart';
 import '../../../widgets/artist/artist_tile.dart';
 import '../view_model/artist_view_model.dart';

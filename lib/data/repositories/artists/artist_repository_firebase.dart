@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
-import '../../../model/artists/artist.dart';
+import '../../../domain/model/artist/artist.dart';
 import '../../dtos/artist_dto.dart';
 import 'artist_repository.dart';
 
@@ -26,8 +26,10 @@ class ArtistRepositoryFirebase extends ArtistRepository {
 
   @override
   Future<List<Artist>> fetchArtists() async {
-    final http.Response response =
-        await _getWithFallback(artistsUri, artistsFallbackUri);
+    final http.Response response = await _getWithFallback(
+      artistsUri,
+      artistsFallbackUri,
+    );
 
     if (response.statusCode == 200) {
       final dynamic decoded = json.decode(response.body);
@@ -38,7 +40,9 @@ class ArtistRepositoryFirebase extends ArtistRepository {
 
       final List<Artist> result = [];
       for (final entry in decoded.entries) {
-        result.add(ArtistDto.fromJson(entry.key, entry.value as Map<String, dynamic>));
+        result.add(
+          ArtistDto.fromJson(entry.key, entry.value as Map<String, dynamic>),
+        );
       }
 
       return result;

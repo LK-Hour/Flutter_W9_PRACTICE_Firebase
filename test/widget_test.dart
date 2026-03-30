@@ -8,7 +8,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:week9_project_firebase/main.dart';
+
+import '../W9 - EX3 - CORRECTIOn with service/main_common.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

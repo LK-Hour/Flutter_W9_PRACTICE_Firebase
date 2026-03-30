@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../model/settings/app_settings.dart';
+import '../../../domain/model/settings/app_settings.dart';
 import '../../states/settings_state.dart';
 import '../../theme/theme.dart';
 import 'widget/theme_color_button.dart';
